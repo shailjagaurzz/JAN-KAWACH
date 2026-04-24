@@ -149,29 +149,38 @@ function Blacklist() {
 
   if (!token) {
     return (
-      <div className="max-w-4xl mx-auto p-4">
-        <h2 className="text-2xl font-bold mb-4">Please log in to access the blacklist</h2>
+      <div className="min-h-screen relative overflow-hidden px-4 py-8">
+        <div className="hero-orb h-56 w-56 bg-cyan-300/35 -top-10 -left-12" />
+        <div className="max-w-4xl mx-auto">
+          <div className="glass-panel rounded-3xl p-8 text-center reveal-up">
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">Please log in to access the blacklist</h2>
+            <p className="text-slate-600">Sign in to report threats and follow community updates.</p>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <div className="flex justify-between items-center mb-6">
+    <div className="min-h-screen relative overflow-hidden px-4 py-8">
+      <div className="hero-orb h-56 w-56 bg-cyan-300/35 -top-10 -left-12" />
+      <div className="hero-orb h-64 w-64 bg-amber-300/35 top-24 -right-16" />
+      <div className="max-w-5xl mx-auto relative z-10">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 mb-6 reveal-up">
         <div>
-          <h2 className="text-2xl font-bold">🤝 Community Security Blacklist</h2>
-          <p className="text-gray-600 text-sm">Protect yourself and others by reporting threats</p>
+          <h2 className="text-3xl font-bold brand-gradient-text">🤝 Community Security Blacklist</h2>
+          <p className="text-slate-600 text-sm">Protect yourself and others by reporting threats</p>
         </div>
-        <div className="space-x-2">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setShowPhoneForm(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            className="bg-slate-900 text-white px-4 py-2 rounded-2xl hover:-translate-y-0.5 transition-transform shadow-lg shadow-slate-900/15"
           >
             📱 Set SMS Phone
           </button>
           <button
             onClick={() => setShowAddForm(true)}
-            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+            className="bg-gradient-to-r from-cyan-600 to-emerald-600 text-white px-4 py-2 rounded-2xl hover:-translate-y-0.5 transition-transform shadow-lg shadow-cyan-600/20"
           >
             ➕ Add Threat
           </button>
@@ -179,21 +188,21 @@ function Blacklist() {
       </div>
 
       {/* Community Impact Banner */}
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4 mb-6">
-        <h3 className="font-semibold text-blue-900 mb-2">🌟 Community Impact</h3>
-        <p className="text-sm text-blue-800 mb-2">
+      <div className="glass-panel rounded-3xl p-5 mb-6 reveal-up">
+        <h3 className="font-semibold text-slate-900 mb-2">🌟 Community Impact</h3>
+        <p className="text-sm text-slate-600 mb-2">
           When you add a threat to the blacklist, <strong>all community members</strong> benefit:
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs text-blue-700">
-          <div className="flex items-center space-x-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-700">
+          <div className="flex items-center space-x-2 bg-white/80 rounded-2xl px-3 py-2 border border-slate-200">
             <span>🔍</span>
             <span>Appears in Threat Checker for everyone</span>
           </div>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-2 bg-white/80 rounded-2xl px-3 py-2 border border-slate-200">
             <span>🚨</span>
             <span>Triggers real-time fraud alerts</span>
           </div>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-2 bg-white/80 rounded-2xl px-3 py-2 border border-slate-200">
             <span>📊</span>
             <span>Increases community threat database</span>
           </div>
@@ -201,17 +210,17 @@ function Blacklist() {
       </div>
 
       {message && (
-        <div className={`p-4 rounded mb-4 ${message.includes('Error') ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+        <div className={`p-4 rounded-2xl mb-4 border ${message.includes('Error') ? 'bg-rose-50 text-rose-700 border-rose-200' : 'bg-emerald-50 text-emerald-700 border-emerald-200'}`}>
           {message}
         </div>
       )}
 
       {/* Add to Blacklist Form */}
       {showAddForm && (
-        <div className="bg-white border rounded-lg p-6 mb-6 shadow-lg">
-          <h3 className="text-lg font-semibold mb-4">🚩 Report New Threat to Community</h3>
-          <div className="bg-yellow-50 border border-yellow-200 rounded p-3 mb-4">
-            <p className="text-sm text-yellow-800">
+        <div className="glass-panel rounded-3xl p-6 mb-6 reveal-up">
+          <h3 className="text-lg font-semibold text-slate-900 mb-4">🚩 Report New Threat to Community</h3>
+          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-3 mb-4">
+            <p className="text-sm text-amber-800">
               <strong>⚠️ Important:</strong> By adding this threat, you're helping protect the entire Jan-Kawach community. 
               This will be visible to all users and used for threat detection.
             </p>
@@ -219,11 +228,11 @@ function Blacklist() {
           <form onSubmit={handleAddToBlacklist} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">Type</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Type</label>
                 <select
                   value={type}
                   onChange={(e) => setType(e.target.value)}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-3 border border-slate-200 rounded-2xl bg-white/80"
                   required
                 >
                   <option value="email">📧 Email</option>
@@ -232,11 +241,11 @@ function Blacklist() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Threat Level</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Threat Level</label>
                 <select
                   value={threatLevel}
                   onChange={(e) => setThreatLevel(e.target.value)}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-3 border border-slate-200 rounded-2xl bg-white/80"
                 >
                   <option value="low">🟢 Low</option>
                   <option value="medium">🟡 Medium</option>
@@ -244,7 +253,7 @@ function Blacklist() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label className="block text-sm font-medium text-slate-700 mb-1">
                   {type === 'email' ? 'Email Address' : type === 'phone' ? 'Phone Number' : 'URL'}
                 </label>
                 <input
@@ -252,32 +261,32 @@ function Blacklist() {
                   placeholder={type === 'email' ? 'threat@example.com' : type === 'phone' ? '+1234567890' : 'https://malicious-site.com'}
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
-                  className="w-full p-2 border rounded"
+                  className="w-full p-3 border border-slate-200 rounded-2xl bg-white/80"
                   required
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Reason for Blacklisting</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Reason for Blacklisting</label>
               <textarea
                 placeholder="Why is this a threat? (e.g., phishing emails, spam calls, malware)"
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
-                className="w-full p-2 border rounded h-20"
+                className="w-full p-3 border border-slate-200 rounded-2xl bg-white/80 h-24"
                 required
               />
             </div>
             <div className="flex space-x-2">
               <button
                 type="submit"
-                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                className="bg-gradient-to-r from-cyan-600 to-emerald-600 text-white px-4 py-2 rounded-2xl hover:-translate-y-0.5 transition-transform"
               >
                 🚩 Report to Community
               </button>
               <button
                 type="button"
                 onClick={() => setShowAddForm(false)}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                className="bg-slate-200 text-slate-700 px-4 py-2 rounded-2xl hover:bg-slate-300"
               >
                 Cancel
               </button>
@@ -288,34 +297,34 @@ function Blacklist() {
 
       {/* Phone Number Form */}
       {showPhoneForm && (
-        <div className="bg-white border rounded-lg p-6 mb-6 shadow-lg">
-          <h3 className="text-lg font-semibold mb-4">Set Phone Number for SMS Alerts</h3>
+        <div className="glass-panel rounded-3xl p-6 mb-6 reveal-up">
+          <h3 className="text-lg font-semibold text-slate-900 mb-4">Set Phone Number for SMS Alerts</h3>
           <form onSubmit={handleUpdatePhone} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Phone Number</label>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
               <input
                 type="tel"
                 placeholder="+1234567890"
                 value={userPhone}
                 onChange={(e) => setUserPhone(e.target.value)}
-                className="w-full p-2 border rounded"
+                className="w-full p-3 border border-slate-200 rounded-2xl bg-white/80"
                 required
               />
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-slate-600 mt-1">
                 Include country code (e.g., +1 for US). You'll receive SMS alerts when blacklisted sources contact you.
               </p>
             </div>
             <div className="flex space-x-2">
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                className="bg-slate-900 text-white px-4 py-2 rounded-2xl hover:-translate-y-0.5 transition-transform"
               >
                 Save Phone Number
               </button>
               <button
                 type="button"
                 onClick={() => setShowPhoneForm(false)}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                className="bg-slate-200 text-slate-700 px-4 py-2 rounded-2xl hover:bg-slate-300"
               >
                 Cancel
               </button>
@@ -326,15 +335,15 @@ function Blacklist() {
 
       {/* Blacklist Items */}
       {loading ? (
-        <div className="text-center py-8">Loading blacklist...</div>
+        <div className="text-center py-8 glass-panel rounded-3xl">Loading blacklist...</div>
       ) : blacklist.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
+        <div className="text-center py-8 text-slate-500 glass-panel rounded-3xl">
           <div className="text-6xl mb-4">🛡️</div>
           <h3 className="text-xl font-semibold mb-2">No Community Threats Yet</h3>
           <p className="mb-4">Be the first to help protect our community by reporting threats.</p>
           <button
             onClick={() => setShowAddForm(true)}
-            className="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700"
+            className="bg-gradient-to-r from-cyan-600 to-emerald-600 text-white px-6 py-2 rounded-2xl hover:-translate-y-0.5 transition-transform"
           >
             🚩 Report First Threat
           </button>
@@ -346,18 +355,18 @@ function Blacklist() {
             const isWatching = item.usersWatching && item.usersWatching.length > 0;
             
             return (
-              <div key={item._id} className="bg-white border rounded-lg p-4 shadow">
+              <div key={item._id} className="glass-panel rounded-3xl p-4 hover-lift">
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
                     <div className="flex items-center space-x-2 mb-2">
                       <span className="text-lg">{getTypeIcon(item.type)}</span>
-                      <span className="font-semibold text-lg">{item.value}</span>
+                      <span className="font-semibold text-lg text-slate-900">{item.value}</span>
                       <span className={`px-2 py-1 rounded text-xs font-medium ${getThreatLevelColor(item.threatLevel)}`}>
                         {item.threatLevel.toUpperCase()}
                       </span>
                     </div>
-                    <p className="text-gray-700 mb-2">{item.reason}</p>
-                    <div className="text-sm text-gray-500">
+                    <p className="text-slate-700 mb-2">{item.reason}</p>
+                    <div className="text-sm text-slate-500">
                       <span>🚩 Reported by: {item.reportedBy?.name || 'Community Member'}</span>
                       <span className="mx-2">•</span>
                       <span>📊 Community Reports: {item.reportCount}</span>
@@ -370,10 +379,10 @@ function Blacklist() {
                   <div className="flex space-x-2 ml-4">
                     <button
                       onClick={() => handleWatchToggle(item._id, isWatching)}
-                      className={`px-3 py-1 rounded text-sm ${
+                        className={`px-3 py-1 rounded-2xl text-sm ${
                         isWatching 
-                          ? 'bg-green-100 text-green-700 hover:bg-green-200' 
-                          : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                          ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100' 
+                          : 'bg-cyan-50 text-cyan-700 hover:bg-cyan-100'
                       }`}
                     >
                       {isWatching ? '🔕 Unwatch' : '🔔 Watch'}
@@ -381,7 +390,7 @@ function Blacklist() {
                     {isCreator && (
                       <button
                         onClick={() => handleRemoveFromBlacklist(item._id)}
-                        className="px-3 py-1 rounded text-sm bg-red-100 text-red-700 hover:bg-red-200"
+                        className="px-3 py-1 rounded-2xl text-sm bg-rose-50 text-rose-700 hover:bg-rose-100"
                       >
                         🗑️ Remove
                       </button>
@@ -393,6 +402,7 @@ function Blacklist() {
           })}
         </div>
       )}
+      </div>
     </div>
   );
 }

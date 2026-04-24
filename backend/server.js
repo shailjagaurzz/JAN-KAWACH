@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 console.log("VT Key loaded:", !!process.env.VIRUSTOTAL_API_KEY);
 
 const express = require('express');
@@ -10,7 +11,7 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/auth_fixed');
 const complaintRoutes = require('./routes/complaint');
 const vaultRoutes = require('./routes/vault');
 const reportRoutes = require('./routes/report');
@@ -20,16 +21,22 @@ const analyticsRoutes = require('./routes/analytics');
 // Missing routes - add fraud detection routes
 const threatMonitor = require('./services/threatMonitor');
 
+// Auth middleware (verifyToken used by many routes below)
+const { verifyToken } = require('./middleware/auth');
 const Post = require('./models/post');
 const Vault = require('./models/vault');
 const ReportedEntity = require('./models/ReportedEntity');
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
+const classifyRoute = require('./routes/classify');
+
+
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use('/api', classifyRoute);
 
 // Serve uploaded files so frontend can link to them
 app.use('/uploads', express.static('uploads'));
@@ -371,7 +378,7 @@ app.put('/api/user/phone', verifyToken, async (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 3001; // Changed to 3001 to test
+const PORT = process.env.PORT || 5000;
 console.log(`Starting server on port ${PORT}...`);
 console.log(`Environment PORT: ${process.env.PORT}`);
 console.log(`Using PORT: ${PORT}`);

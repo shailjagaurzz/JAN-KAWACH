@@ -207,12 +207,13 @@ function Vault() {
 
   if (!token) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-cream via-white to-cream">
+      <div className="min-h-screen relative overflow-hidden px-4 py-8">
+        <div className="hero-orb h-56 w-56 bg-cyan-300/35 -top-10 -left-12" />
         <Navbar />
         <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-brown-primary mb-4">🔒 Secure Evidence Vault</h2>
-            <p className="text-gray-600">Please log in to access the blockchain evidence vault</p>
+          <div className="glass-panel rounded-3xl p-8 text-center reveal-up">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">🔒 Secure Evidence Vault</h2>
+            <p className="text-slate-600">Please log in to access the blockchain evidence vault</p>
           </div>
         </div>
       </div>
@@ -220,32 +221,34 @@ function Vault() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream via-white to-cream">
+    <div className="min-h-screen relative overflow-hidden px-4 py-8">
+      <div className="hero-orb h-56 w-56 bg-cyan-300/35 -top-10 -left-12" />
+      <div className="hero-orb h-64 w-64 bg-amber-300/35 top-24 -right-16" />
       <Navbar />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-brown-primary mb-4">
+          <div className="text-center mb-8 reveal-up">
+            <h1 className="text-4xl md:text-5xl font-bold brand-gradient-text mb-4">
               🔗 Blockchain Evidence Vault
             </h1>
-            <p className="text-gray-600 text-lg">
+            <p className="text-slate-600 text-lg max-w-3xl mx-auto">
               Immutable, tamper-proof evidence storage powered by blockchain technology
             </p>
           </div>
 
           {/* Blockchain Stats Dashboard */}
           {blockchainStats && (
-            <div className="bg-white rounded-lg shadow-xl p-6 mb-8 border-t-4 border-blue-600">
-              <h3 className="text-xl font-bold mb-6 flex items-center text-blue-900">
+            <div className="glass-panel rounded-3xl p-6 mb-8">
+              <h3 className="text-xl font-bold mb-6 flex items-center text-slate-900">
                 <span className="mr-3">📊</span>
                 Blockchain Network Status
                 <span className="ml-auto">
                   <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
                     blockchainStats.chainValid 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-red-100 text-red-800'
+                      ? 'bg-emerald-100 text-emerald-800' 
+                      : 'bg-rose-100 text-rose-800'
                   }`}>
                     <span className="mr-1">{blockchainStats.chainValid ? '✅' : '❌'}</span>
                     {blockchainStats.chainValid ? 'SECURE' : 'WARNING'}
@@ -253,35 +256,35 @@ function Vault() {
                 </span>
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div className="text-center bg-blue-50 rounded-lg p-4">
-                  <div className="text-3xl font-bold text-blue-600 mb-2">
+                <div className="text-center bg-white/80 rounded-2xl p-4 border border-slate-200">
+                  <div className="text-3xl font-bold text-cyan-700 mb-2">
                     {blockchainStats.totalBlocks}
                   </div>
-                  <div className="text-sm text-gray-600 font-medium">Total Blocks</div>
-                  <div className="text-xs text-gray-500 mt-1">In Blockchain</div>
+                  <div className="text-sm text-slate-600 font-medium">Total Blocks</div>
+                  <div className="text-xs text-slate-500 mt-1">In Blockchain</div>
                 </div>
-                <div className="text-center bg-green-50 rounded-lg p-4">
-                  <div className="text-3xl font-bold text-green-600 mb-2">
+                <div className="text-center bg-white/80 rounded-2xl p-4 border border-slate-200">
+                  <div className="text-3xl font-bold text-emerald-600 mb-2">
                     {blockchainStats.evidenceBlocks}
                   </div>
-                  <div className="text-sm text-gray-600 font-medium">Evidence Files</div>
-                  <div className="text-xs text-gray-500 mt-1">Secured</div>
+                  <div className="text-sm text-slate-600 font-medium">Evidence Files</div>
+                  <div className="text-xs text-slate-500 mt-1">Secured</div>
                 </div>
-                <div className="text-center bg-purple-50 rounded-lg p-4">
-                  <div className={`text-3xl font-bold mb-2 ${blockchainStats.chainValid ? 'text-green-600' : 'text-red-600'}`}>
+                <div className="text-center bg-white/80 rounded-2xl p-4 border border-slate-200">
+                  <div className={`text-3xl font-bold mb-2 ${blockchainStats.chainValid ? 'text-emerald-600' : 'text-rose-600'}`}>
                     {blockchainStats.chainValid ? '🔒' : '⚠️'}
                   </div>
-                  <div className="text-sm text-gray-600 font-medium">Chain Integrity</div>
-                  <div className={`text-xs mt-1 ${blockchainStats.chainValid ? 'text-green-600' : 'text-red-600'}`}>
+                  <div className="text-sm text-slate-600 font-medium">Chain Integrity</div>
+                  <div className={`text-xs mt-1 ${blockchainStats.chainValid ? 'text-emerald-600' : 'text-rose-600'}`}>
                     {blockchainStats.chainValid ? 'Verified' : 'Compromised'}
                   </div>
                 </div>
-                <div className="text-center bg-orange-50 rounded-lg p-4">
-                  <div className="text-3xl font-bold text-orange-600 mb-2">
+                <div className="text-center bg-white/80 rounded-2xl p-4 border border-slate-200">
+                  <div className="text-3xl font-bold text-amber-600 mb-2">
                     {blockchainStats.difficulty}
                   </div>
-                  <div className="text-sm text-gray-600 font-medium">Security Level</div>
-                  <div className="text-xs text-gray-500 mt-1">Mining Difficulty</div>
+                  <div className="text-sm text-slate-600 font-medium">Security Level</div>
+                  <div className="text-xs text-slate-500 mt-1">Mining Difficulty</div>
                 </div>
               </div>
             </div>
@@ -289,18 +292,18 @@ function Vault() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Upload Section */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h3 className="text-2xl font-semibold mb-6 flex items-center">
+            <div className="glass-panel rounded-3xl p-6 md:p-8">
+              <h3 className="text-2xl font-semibold mb-6 flex items-center text-slate-900">
                 📤 Upload Evidence
               </h3>
               
               <form onSubmit={handleUpload} className="space-y-6">
                 {/* File Input */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
                     Evidence File *
                   </label>
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-brown-primary transition-colors">
+                  <div className="border-2 border-dashed border-slate-300 rounded-2xl p-6 text-center hover:border-cyan-500 transition-colors bg-white/70">
                     <input
                       id="file-input"
                       type="file"
@@ -311,10 +314,10 @@ function Vault() {
                     />
                     <label htmlFor="file-input" className="cursor-pointer">
                       <div className="text-4xl mb-2">📁</div>
-                      <p className="text-gray-600">
+                      <p className="text-slate-600">
                         Click to select evidence file
                       </p>
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p className="text-xs text-slate-500 mt-1">
                         Supported: Images, Videos, Audio, PDF, Documents (Max 50MB)
                       </p>
                     </label>
@@ -323,13 +326,13 @@ function Vault() {
                   {/* Upload Progress */}
                   {uploadProgress > 0 && (
                     <div className="mt-4">
-                      <div className="flex justify-between text-sm text-gray-600 mb-1">
+                      <div className="flex justify-between text-sm text-slate-600 mb-1">
                         <span>Securing to blockchain...</span>
                         <span>{uploadProgress}%</span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="w-full bg-slate-200 rounded-full h-2">
                         <div 
-                          className="bg-brown-primary h-2 rounded-full transition-all duration-300"
+                          className="bg-gradient-to-r from-cyan-600 to-emerald-600 h-2 rounded-full transition-all duration-300"
                           style={{ width: `${uploadProgress}%` }}
                         ></div>
                       </div>
@@ -400,7 +403,7 @@ function Vault() {
             </div>
 
             {/* Evidence List */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
+            <div className="glass-panel rounded-3xl p-6 md:p-8">
               <h3 className="text-2xl font-semibold mb-6 flex items-center">
                 📋 Evidence Vault
               </h3>

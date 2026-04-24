@@ -2,14 +2,20 @@ const { SuspiciousNumber, FraudPattern, FraudDetectionLog, TrustedNumber } = req
 
 class FraudDetectionEngine {
   constructor() {
+    this.fraudPatterns = [];
     this.initialize();
   }
 
   async initialize() {
-    // Load fraud patterns into memory for faster detection
-    this.fraudPatterns = await FraudPattern.find({ isActive: true });
-    console.log(`🔍 Loaded ${this.fraudPatterns.length} fraud patterns`);
-    
+    try {
+      // Load fraud patterns into memory for faster detection
+      this.fraudPatterns = await FraudPattern.find({ isActive: true });
+      console.log(`🔍 Loaded ${this.fraudPatterns.length} fraud patterns`);
+    } catch (error) {
+      console.error('Failed to preload fraud patterns. Continuing with fallback detection only.', error.message);
+      this.fraudPatterns = [];
+    }
+
     // Initialize ML models (in a real implementation, load trained models)
     this.initializeMLModels();
   }

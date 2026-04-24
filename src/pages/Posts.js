@@ -162,19 +162,21 @@ function Posts() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream via-white to-cream py-8">
+    <div className="min-h-screen relative overflow-hidden py-8 px-4">
+      <div className="hero-orb h-56 w-56 bg-cyan-300/35 -top-10 -left-12" />
+      <div className="hero-orb h-64 w-64 bg-amber-300/35 top-20 -right-16" />
       <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-brown-primary mb-2">Community Posts</h1>
-          <p className="text-gray-600 text-lg">Share experiences, ask questions, and help protect our community</p>
+        <div className="text-center mb-8 glass-panel rounded-3xl p-8 reveal-up">
+          <h1 className="text-4xl md:text-5xl font-bold brand-gradient-text mb-2">Community Posts</h1>
+          <p className="text-slate-600 text-lg">Share experiences, ask questions, and help protect our community</p>
         </div>
 
         {/* Navigation */}
         <div className="mb-6">
           <Link 
             to="/" 
-            className="inline-flex items-center text-brown-primary hover:text-brown-secondary font-medium"
+            className="inline-flex items-center text-cyan-700 hover:text-cyan-900 font-semibold"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
@@ -185,14 +187,14 @@ function Posts() {
 
         {/* Create Post Section */}
         {token ? (
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8 border-2 border-brown-primary/10">
+          <div className="glass-panel rounded-3xl p-6 mb-8 reveal-up">
             {!showCreateForm ? (
               <div className="text-center">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">Share with the Community</h3>
-                <p className="text-gray-600 mb-4">Have a security tip, scam alert, or question? Let others know!</p>
+                <h3 className="text-xl font-semibold text-slate-900 mb-3">Share with the Community</h3>
+                <p className="text-slate-600 mb-4">Have a security tip, scam alert, or question? Let others know!</p>
                 <button
                   onClick={() => setShowCreateForm(true)}
-                  className="bg-brown-primary hover:bg-brown-secondary text-white px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center"
+                  className="bg-gradient-to-r from-cyan-600 to-emerald-600 text-white px-6 py-3 rounded-2xl font-semibold transition-transform hover:-translate-y-0.5 inline-flex items-center shadow-lg shadow-cyan-600/20"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
@@ -207,7 +209,7 @@ function Posts() {
                   <button
                     type="button"
                     onClick={() => setShowCreateForm(false)}
-                    className="text-gray-500 hover:text-gray-700"
+                    className="text-slate-500 hover:text-slate-700"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -338,12 +340,12 @@ function Posts() {
             )}
           </div>
         ) : (
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8 text-center border-2 border-brown-primary/10">
-            <h3 className="text-xl font-semibold text-gray-800 mb-3">Join the Conversation</h3>
-            <p className="text-gray-600 mb-4">Log in to share your experiences and help protect the community</p>
+          <div className="glass-panel rounded-3xl p-6 mb-8 text-center">
+            <h3 className="text-xl font-semibold text-slate-900 mb-3">Join the Conversation</h3>
+            <p className="text-slate-600 mb-4">Log in to share your experiences and help protect the community</p>
             <Link
               to="/auth"
-              className="bg-brown-primary hover:bg-brown-secondary text-white px-6 py-3 rounded-lg font-medium transition-colors inline-block"
+              className="inline-block bg-gradient-to-r from-cyan-600 to-emerald-600 text-white px-6 py-3 rounded-2xl font-semibold shadow-lg shadow-cyan-600/20"
             >
               Sign In to Post
             </Link>
@@ -352,9 +354,9 @@ function Posts() {
 
         {/* Messages */}
         {message && (
-          <div className={`p-4 rounded-lg mb-6 ${message.includes('Error') || message.includes('Please log in') 
-            ? 'bg-red-100 text-red-700 border border-red-300' 
-            : 'bg-green-100 text-green-700 border border-green-300'}`}>
+          <div className={`p-4 rounded-2xl mb-6 border ${message.includes('Error') || message.includes('Please log in') 
+            ? 'bg-rose-50 text-rose-700 border-rose-200' 
+            : 'bg-emerald-50 text-emerald-700 border-emerald-200'}`}>
             {message}
           </div>
         )}
@@ -362,35 +364,35 @@ function Posts() {
         {/* Posts List */}
         <div className="space-y-6">
           {loading ? (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-brown-primary"></div>
-              <p className="mt-2 text-gray-600">Loading posts...</p>
+              <div className="text-center py-12 glass-panel rounded-3xl">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-600"></div>
+              <p className="mt-2 text-slate-600">Loading posts...</p>
             </div>
           ) : posts.length === 0 ? (
-            <div className="text-center py-12 bg-white rounded-xl shadow-lg">
+            <div className="text-center py-12 glass-panel rounded-3xl">
               <div className="text-6xl mb-4">📝</div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">No posts yet</h3>
-              <p className="text-gray-600">Be the first to share something with the community!</p>
+              <h3 className="text-xl font-semibold text-slate-900 mb-2">No posts yet</h3>
+              <p className="text-slate-600">Be the first to share something with the community!</p>
             </div>
           ) : (
             posts.map((post, index) => (
-              <div key={post._id || post.id || index} className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-brown-primary hover:shadow-xl transition-shadow">
+              <div key={post._id || post.id || index} className="glass-panel rounded-3xl p-6 border-l-4 border-cyan-600 hover-lift">
                 {/* Post Header */}
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-brown-primary rounded-full flex items-center justify-center text-white font-semibold">
+                    <div className="w-10 h-10 bg-gradient-to-br from-cyan-600 to-emerald-600 rounded-full flex items-center justify-center text-white font-semibold shadow-md">
                       {post.anonymous ? '🎭' : (post.author?.name || post.author || 'A')[0].toUpperCase()}
                     </div>
                     <div>
                       <div className="flex items-center space-x-2">
-                        <span className="font-semibold text-gray-800">
+                        <span className="font-semibold text-slate-900">
                           {post.anonymous ? 'Anonymous User' : (post.author?.name || post.author || 'Unknown User')}
                         </span>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryStyle(post.category)}`}>
                           {getCategoryLabel(post.category)}
                         </span>
                       </div>
-                      <div className="text-sm text-gray-500">
+                      <div className="text-sm text-slate-500">
                         {formatDate(post.createdAt)} • {post.content?.length || 0} characters
                       </div>
                     </div>
@@ -399,11 +401,11 @@ function Posts() {
 
                 {/* Post Content */}
                 {post.title && (
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">{post.title}</h3>
+                  <h3 className="text-lg font-semibold text-slate-900 mb-2">{post.title}</h3>
                 )}
                 
                 {post.content && (
-                  <div className="text-gray-700 leading-relaxed whitespace-pre-wrap mb-4">
+                  <div className="text-slate-700 leading-relaxed whitespace-pre-wrap mb-4">
                     {post.content}
                   </div>
                 )}
@@ -414,29 +416,29 @@ function Posts() {
                     <img 
                       src={`http://localhost:5000${post.imageUrl}`}
                       alt="Post attachment" 
-                      className="max-w-full h-auto rounded-lg shadow-md cursor-pointer hover:shadow-lg transition-shadow"
+                      className="max-w-full h-auto rounded-2xl shadow-md cursor-pointer hover:shadow-lg transition-shadow"
                       onClick={() => window.open(`http://localhost:5000${post.imageUrl}`, '_blank')}
                     />
                   </div>
                 )}
 
                 {/* Post Footer */}
-                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                  <div className="flex items-center space-x-4 text-sm text-gray-500">
-                    <button className="flex items-center space-x-1 hover:text-brown-primary transition-colors">
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200/80">
+                  <div className="flex items-center space-x-4 text-sm text-slate-500">
+                    <button className="flex items-center space-x-1 hover:text-cyan-700 transition-colors">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                       </svg>
                       <span>Helpful</span>
                     </button>
-                    <button className="flex items-center space-x-1 hover:text-brown-primary transition-colors">
+                    <button className="flex items-center space-x-1 hover:text-cyan-700 transition-colors">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.959 8.959 0 01-4.906-1.436L3 21l1.436-5.094A8.959 8.959 0 013 12c0-4.418 3.582-8 8-8s8 3.582 8 8z" />
                       </svg>
                       <span>Reply</span>
                     </button>
                   </div>
-                  <button className="text-sm text-gray-500 hover:text-brown-primary transition-colors">
+                  <button className="text-sm text-slate-500 hover:text-cyan-700 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
                     </svg>
@@ -450,7 +452,7 @@ function Posts() {
         {/* Load More Button */}
         {posts.length > 0 && (
           <div className="text-center mt-8">
-            <button className="bg-white hover:bg-gray-50 text-brown-primary border-2 border-brown-primary px-6 py-3 rounded-lg font-medium transition-colors">
+            <button className="bg-white/90 hover:bg-white text-cyan-800 border border-cyan-200 px-6 py-3 rounded-2xl font-semibold transition-colors shadow-sm">
               Load More Posts
             </button>
           </div>

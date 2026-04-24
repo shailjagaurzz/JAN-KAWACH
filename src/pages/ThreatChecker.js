@@ -30,8 +30,8 @@ function CommunityStats() {
 
   if (loading) {
     return (
-      <div className="mt-8 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg">
-        <div className="animate-pulse">Loading community statistics...</div>
+      <div className="mt-8 glass-panel rounded-3xl p-4">
+        <div className="animate-pulse text-slate-600">Loading community statistics...</div>
       </div>
     );
   }
@@ -39,29 +39,29 @@ function CommunityStats() {
   if (!stats) return null;
 
   return (
-    <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-200">
-      <h4 className="font-semibold text-blue-900 mb-4 flex items-center">
+    <div className="mt-8 glass-panel rounded-3xl p-6">
+      <h4 className="font-semibold text-slate-900 mb-4 flex items-center">
         🤝 Community Protection Statistics
       </h4>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-        <div className="bg-white p-3 rounded shadow">
-          <div className="text-2xl font-bold text-blue-600">{stats.totalThreats || 0}</div>
-          <div className="text-sm text-gray-600">Total Threats</div>
+        <div className="bg-white/80 p-3 rounded-2xl border border-slate-200">
+          <div className="text-2xl font-bold text-cyan-700">{stats.totalThreats || 0}</div>
+          <div className="text-sm text-slate-600">Total Threats</div>
         </div>
-        <div className="bg-white p-3 rounded shadow">
-          <div className="text-2xl font-bold text-red-600">{stats.highRiskThreats || 0}</div>
-          <div className="text-sm text-gray-600">High Risk</div>
+        <div className="bg-white/80 p-3 rounded-2xl border border-slate-200">
+          <div className="text-2xl font-bold text-rose-600">{stats.highRiskThreats || 0}</div>
+          <div className="text-sm text-slate-600">High Risk</div>
         </div>
-        <div className="bg-white p-3 rounded shadow">
-          <div className="text-2xl font-bold text-green-600">{stats.activeWatchers || 0}</div>
-          <div className="text-sm text-gray-600">Active Watchers</div>
+        <div className="bg-white/80 p-3 rounded-2xl border border-slate-200">
+          <div className="text-2xl font-bold text-emerald-600">{stats.activeWatchers || 0}</div>
+          <div className="text-sm text-slate-600">Active Watchers</div>
         </div>
-        <div className="bg-white p-3 rounded shadow">
-          <div className="text-2xl font-bold text-purple-600">{stats.reportsToday || 0}</div>
-          <div className="text-sm text-gray-600">Reports Today</div>
+        <div className="bg-white/80 p-3 rounded-2xl border border-slate-200">
+          <div className="text-2xl font-bold text-amber-600">{stats.reportsToday || 0}</div>
+          <div className="text-sm text-slate-600">Reports Today</div>
         </div>
       </div>
-      <div className="mt-4 text-center text-sm text-blue-700">
+      <div className="mt-4 text-center text-sm text-cyan-700">
         <strong>Together we've blocked {stats.totalThreats || 0} threats!</strong> 
         Join our community to help protect others.
       </div>
@@ -171,9 +171,13 @@ function ThreatChecker() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6">🔍 Threat Checker</h2>
-      <p className="text-gray-600 mb-6">
+    <div className="min-h-screen relative overflow-hidden px-4 py-8">
+      <div className="hero-orb h-56 w-56 bg-cyan-300/35 -top-10 -left-12" />
+      <div className="hero-orb h-64 w-64 bg-amber-300/35 top-24 -right-16" />
+      <div className="max-w-3xl mx-auto relative z-10">
+      <div className="glass-panel rounded-3xl p-6 md:p-8 reveal-up">
+      <h2 className="text-3xl md:text-4xl font-bold brand-gradient-text mb-4">🔍 Threat Checker</h2>
+      <p className="text-slate-600 mb-6">
         Check if an email, phone number, or URL has been blacklisted by our community members. 
         Our threat detection is powered by <strong>community intelligence</strong> - when users report threats, 
         everyone benefits from shared protection.
@@ -217,7 +221,7 @@ function ThreatChecker() {
           <button
             type="submit"
             disabled={loading}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+            className="bg-gradient-to-r from-cyan-600 to-emerald-600 text-white px-4 py-2 rounded-2xl hover:-translate-y-0.5 transition-transform disabled:opacity-50"
           >
             {loading ? 'Checking...' : '🔍 Check Threat'}
           </button>
@@ -227,7 +231,7 @@ function ThreatChecker() {
               type="button"
               onClick={handleMonitorMessage}
               disabled={loading}
-              className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 disabled:opacity-50"
+              className="bg-slate-900 text-white px-4 py-2 rounded-2xl hover:-translate-y-0.5 transition-transform disabled:opacity-50"
             >
               {loading ? 'Sending...' : '🚨 Test SMS Alert'}
             </button>
@@ -236,19 +240,19 @@ function ThreatChecker() {
       </form>
 
       {message && (
-        <div className={`p-4 rounded mb-4 ${message.includes('Error') ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'}`}>
+        <div className={`p-4 rounded-2xl mb-4 border ${message.includes('Error') ? 'bg-rose-50 text-rose-700 border-rose-200' : 'bg-cyan-50 text-cyan-700 border-cyan-200'}`}>
           {message}
         </div>
       )}
 
       {result && (
-        <div className="bg-white border rounded-lg p-6 shadow">
-          <h3 className="text-lg font-semibold mb-4">
+        <div className="glass-panel rounded-3xl p-6">
+          <h3 className="text-lg font-semibold text-slate-900 mb-4">
             {result.isThreat ? '⚠️ Threat Detected' : '✅ Safe'}
           </h3>
           
           {result.isThreat && result.threat ? (
-            <div className={`border rounded-lg p-4 ${getThreatLevelColor(result.threat.threatLevel)}`}>
+            <div className={`border rounded-2xl p-4 ${getThreatLevelColor(result.threat.threatLevel)}`}>
               <div className="flex items-center space-x-2 mb-3">
                 <span className="text-lg">{getTypeIcon(result.threat.type)}</span>
                 <span className="font-semibold">{result.threat.value}</span>
@@ -364,6 +368,8 @@ function ThreatChecker() {
 
       {/* Community Statistics Section */}
       <CommunityStats />
+      </div>
+      </div>
     </div>
   );
 }

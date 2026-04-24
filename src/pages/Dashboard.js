@@ -62,32 +62,36 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream via-white to-cream">
+    <div className="min-h-screen relative overflow-hidden">
+      <div className="hero-orb h-52 w-52 bg-cyan-300/45 -top-10 -left-12" />
+      <div className="hero-orb h-64 w-64 bg-amber-300/45 top-32 -right-16" />
+      <div className="hero-orb h-56 w-56 bg-emerald-300/35 bottom-6 left-1/3" />
+
       <Navbar 
         onLoginClick={() => setShowLoginModal(true)}
         onSignupClick={() => setShowSignupModal(true)}
       />
       
       {/* Hero Section */}
-      <section className="py-16 px-8 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl font-bold text-brown-primary tracking-wider mb-4">
+      <section className="py-16 md:py-20 px-5 md:px-8 text-center relative z-10 reveal-up">
+        <div className="max-w-5xl mx-auto glass-panel rounded-3xl p-8 md:p-12">
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 brand-gradient-text">
             JAN - KAWACH
           </h1>
-          <p className="text-brown-secondary font-medium text-xl mb-8">
+          <p className="text-cyan-800 font-semibold text-base md:text-xl mb-7">
             Your Digital Security Guardian
           </p>
           
-          <h2 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
             Protecting Communities from 
-            <span className="text-brown-primary"> Digital Threats</span>
+            <span className="brand-gradient-text"> Digital Threats</span>
           </h2>
           
-          <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-700 mb-8 leading-relaxed max-w-3xl mx-auto">
             Join thousands of users in creating a safer digital environment through collaborative threat reporting and real-time security alerts.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-5">
             {token ? (
               <Link to="/posts">
                 <Button variant="primary" size="lg">
@@ -113,34 +117,52 @@ const Dashboard = () => {
               </>
             )}
           </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 text-left">
+            <div className="bg-white/80 border border-slate-200 rounded-2xl p-4 hover-lift">
+              <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Coverage</p>
+              <p className="text-lg font-bold text-slate-900">24/7 Threat Monitoring</p>
+            </div>
+            <div className="bg-white/80 border border-slate-200 rounded-2xl p-4 hover-lift">
+              <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Community</p>
+              <p className="text-lg font-bold text-slate-900">Collaborative Reporting</p>
+            </div>
+            <div className="bg-white/80 border border-slate-200 rounded-2xl p-4 hover-lift">
+              <p className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Evidence</p>
+              <p className="text-lg font-bold text-slate-900">Secure Digital Vault</p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-8">
+      <section className="py-16 px-5 md:px-8 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-12">
+          <h3 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-4">
             How Jan-Kawach Protects You
           </h3>
+          <p className="text-center text-slate-600 max-w-2xl mx-auto mb-12">
+            Purpose-built safety modules that keep your team informed, connected, and protected.
+          </p>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuresLoading ? (
               // simple skeletons
               Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="animate-pulse bg-white rounded-xl p-6 shadow-lg h-44" />
+                <div key={i} className="animate-pulse bg-white/80 border border-slate-200 rounded-2xl p-6 shadow-lg h-44" />
               ))
             ) : (
               features.map((feature, index) => (
-                <Link key={index} to={feature.link} className="group">
-                  <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:-translate-y-1 cursor-pointer border-2 border-transparent group-hover:border-brown-primary">
-                    <div className="text-4xl mb-4">{feature.icon}</div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-brown-primary transition-colors">
+                <Link key={index} to={feature.link} className="group feature-reveal">
+                  <div className="glass-panel rounded-2xl p-6 cursor-pointer border-2 border-transparent hover:border-cyan-200 hover-lift">
+                    <div className="text-4xl mb-4 transition-transform duration-300 group-hover:scale-110">{feature.icon}</div>
+                    <h4 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-cyan-700 transition-colors">
                       {feature.title}
                     </h4>
-                    <p className="text-gray-600 leading-relaxed">
+                    <p className="text-slate-600 leading-relaxed">
                       {feature.description}
                     </p>
-                    <div className="mt-4 text-brown-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="mt-4 text-cyan-700 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
                       Learn more →
                     </div>
                   </div>
@@ -152,25 +174,25 @@ const Dashboard = () => {
       </section>
 
       {/* Mission Statement */}
-      <section className="bg-gradient-to-r from-brown-primary to-brown-secondary text-white py-16 px-8">
+      <section className="py-16 px-5 md:px-8 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center">
+          <div className="text-center glass-panel rounded-3xl p-8 md:p-10 border border-slate-200/80">
             <h3 className="text-3xl font-bold mb-6">Our Mission</h3>
-            <p className="text-xl leading-relaxed mb-8">
+            <p className="text-xl leading-relaxed mb-8 text-slate-700">
               To build a community that protects each other and takes action against digital and real-world malpractice.
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6">
-                <h4 className="font-bold text-lg mb-2">Stay Aware</h4>
-                <p>Get informed about latest threats</p>
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover-lift">
+                <h4 className="font-bold text-lg mb-2 text-slate-900">Stay Aware</h4>
+                <p className="text-slate-600">Get informed about latest threats</p>
               </div>
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6">
-                <h4 className="font-bold text-lg mb-2">Stay Protected</h4>
-                <p>Use our tools to safeguard yourself</p>
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover-lift">
+                <h4 className="font-bold text-lg mb-2 text-slate-900">Stay Protected</h4>
+                <p className="text-slate-600">Use our tools to safeguard yourself</p>
               </div>
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6">
-                <h4 className="font-bold text-lg mb-2">Stay Connected</h4>
-                <p>Together, we make the internet safer</p>
+              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 hover-lift">
+                <h4 className="font-bold text-lg mb-2 text-slate-900">Stay Connected</h4>
+                <p className="text-slate-600">Together, we make the internet safer</p>
               </div>
             </div>
           </div>
@@ -178,17 +200,17 @@ const Dashboard = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="bg-cream py-12 px-8">
+      <section className="py-12 pb-16 px-5 md:px-8 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          <div className="text-center glass-panel rounded-3xl p-8 border border-slate-200/80">
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
               Ready to Join Our Security Community?
             </h3>
-            <p className="text-gray-700 mb-6">
+            <p className="text-slate-700 mb-6">
               Start protecting yourself and others from digital threats today.
             </p>
-            <div className="flex justify-center items-center space-x-4">
-              <span className="text-brown-secondary text-lg font-medium">Not a member yet?</span>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+              <span className="text-cyan-800 text-lg font-semibold">Not a member yet?</span>
               <Button 
                 onClick={() => setShowSignupModal(true)} 
                 variant="primary" 

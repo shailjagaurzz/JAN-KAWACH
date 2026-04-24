@@ -361,14 +361,36 @@ function Complaint() {
     setLoading(false);
   };
 
+  useEffect(() => {
+    const fetchBlockchainStats = async () => {
+      if (!token) return;
+      
+      try {
+        const res = await apiFetch('/api/vault/blockchain/stats', {
+          method: 'GET'
+        }, token);
+        
+        const data = await res.json();
+        if (data.success) {
+          setBlockchainStats(data.blockchainStats);
+        }
+      } catch (error) {
+        console.error('Error fetching blockchain stats:', error);
+      }
+    };
+
+    fetchBlockchainStats();
+  }, [token]);
+
   if (!token) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-cream via-white to-cream">
+      <div className="min-h-screen relative overflow-hidden">
+        <div className="hero-orb h-56 w-56 bg-cyan-300/35 -top-10 -left-12" />
         <Navbar />
         <div className="flex items-center justify-center min-h-screen">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold text-brown-primary mb-4">Please Login</h1>
-            <p className="text-gray-600">You need to be logged in to file a complaint.</p>
+          <div className="glass-panel rounded-3xl p-8 text-center reveal-up">
+            <h1 className="text-3xl font-bold text-slate-900 mb-4">Please Login</h1>
+            <p className="text-slate-600">You need to be logged in to file a complaint.</p>
           </div>
         </div>
       </div>
@@ -376,30 +398,32 @@ function Complaint() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream via-white to-cream">
+    <div className="min-h-screen relative overflow-hidden">
+      <div className="hero-orb h-56 w-56 bg-cyan-300/35 -top-10 -left-12" />
+      <div className="hero-orb h-64 w-64 bg-amber-300/35 top-28 -right-16" />
       <Navbar />
       
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-8 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-brown-primary mb-4">
+          <div className="text-center mb-8 reveal-up">
+            <h1 className="text-4xl md:text-5xl font-bold brand-gradient-text mb-4">
               🏛️ Cyber Crime Complaint Center
             </h1>
-            <p className="text-gray-600 text-lg">
+            <p className="text-slate-600 text-lg max-w-3xl mx-auto">
               File complaints directly with authorities and secure evidence using blockchain technology
             </p>
           </div>
 
           {/* Tab Navigation */}
-          <div className="bg-white rounded-lg shadow-lg mb-6">
-            <div className="flex border-b border-gray-200">
+          <div className="glass-panel rounded-3xl mb-6 overflow-hidden">
+            <div className="flex border-b border-slate-200">
               <button
                 onClick={() => setActiveTab('file-complaint')}
                 className={`flex-1 py-4 px-6 text-center font-medium transition-colors ${
                   activeTab === 'file-complaint'
-                    ? 'bg-brown-primary text-white border-b-2 border-brown-primary'
-                    : 'text-gray-600 hover:text-brown-primary'
+                    ? 'bg-slate-900 text-white'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 📝 File Complaint
@@ -408,8 +432,8 @@ function Complaint() {
                 onClick={() => setActiveTab('officials-contact')}
                 className={`flex-1 py-4 px-6 text-center font-medium transition-colors ${
                   activeTab === 'officials-contact'
-                    ? 'bg-brown-primary text-white border-b-2 border-brown-primary'
-                    : 'text-gray-600 hover:text-brown-primary'
+                    ? 'bg-slate-900 text-white'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 📞 Official Contacts
@@ -418,8 +442,8 @@ function Complaint() {
                 onClick={() => setActiveTab('track-complaint')}
                 className={`flex-1 py-4 px-6 text-center font-medium transition-colors ${
                   activeTab === 'track-complaint'
-                    ? 'bg-brown-primary text-white border-b-2 border-brown-primary'
-                    : 'text-gray-600 hover:text-brown-primary'
+                    ? 'bg-slate-900 text-white'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 🔍 Track Complaint
@@ -428,8 +452,8 @@ function Complaint() {
                 onClick={() => setActiveTab('evidence-vault')}
                 className={`flex-1 py-4 px-6 text-center font-medium transition-colors ${
                   activeTab === 'evidence-vault'
-                    ? 'bg-brown-primary text-white border-b-2 border-brown-primary'
-                    : 'text-gray-600 hover:text-brown-primary'
+                    ? 'bg-slate-900 text-white'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 🔗 Evidence Vault
@@ -439,18 +463,18 @@ function Complaint() {
 
           {/* Tab Content */}
           {activeTab === 'file-complaint' && (
-            <div className="bg-white rounded-lg shadow-lg p-8">
+            <div className="glass-panel rounded-3xl p-6 md:p-8">
               {/* Emergency Notice */}
-              <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+              <div className="bg-rose-50 border border-rose-200 rounded-2xl p-4 mb-6">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                    <svg className="h-5 w-5 text-rose-400" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <div className="ml-3">
-                    <h3 className="text-sm font-medium text-red-800">Emergency Situations</h3>
-                    <p className="text-sm text-red-700 mt-1">
+                    <h3 className="text-sm font-medium text-rose-900">Emergency Situations</h3>
+                    <p className="text-sm text-rose-700 mt-1">
                       For immediate threats or ongoing attacks, contact Cyber Crime Helpline: <strong>1930</strong>
                     </p>
                   </div>
@@ -459,8 +483,8 @@ function Complaint() {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Official Selection */}
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                <div className="bg-white/80 p-4 rounded-2xl border border-slate-200">
+                  <label className="block text-sm font-medium text-slate-700 mb-3">
                     Select Authority to File Complaint With *
                   </label>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -472,12 +496,12 @@ function Complaint() {
                           value={key}
                           checked={formData.officialType === key}
                           onChange={handleInputChange}
-                          className="mt-1 text-brown-primary focus:ring-brown-primary"
+                          className="mt-1 text-cyan-700 focus:ring-cyan-500"
                         />
                         <div className="flex-1">
-                          <div className="font-medium text-gray-900">{official.title}</div>
-                          <div className="text-sm text-gray-600">{official.description}</div>
-                          <div className="text-xs text-blue-600">📞 {official.phone}</div>
+                          <div className="font-medium text-slate-900">{official.title}</div>
+                          <div className="text-sm text-slate-600">{official.description}</div>
+                          <div className="text-xs text-cyan-700">📞 {official.phone}</div>
                         </div>
                       </label>
                     ))}
@@ -485,10 +509,10 @@ function Complaint() {
                 </div>
 
                 {/* Legal Disclaimer and Verification */}
-                <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 mb-6">
-                  <h3 className="text-lg font-bold text-red-800 mb-3">⚖️ LEGAL DISCLAIMER & ACCOUNTABILITY</h3>
-                  <div className="space-y-3 text-sm text-red-700">
-                    <div className="bg-red-100 p-3 rounded border-l-4 border-red-500">
+                <div className="bg-rose-50 border border-rose-200 rounded-3xl p-6 mb-6">
+                  <h3 className="text-lg font-bold text-rose-900 mb-3">⚖️ LEGAL DISCLAIMER & ACCOUNTABILITY</h3>
+                  <div className="space-y-3 text-sm text-rose-700">
+                    <div className="bg-white/80 p-3 rounded-2xl border border-rose-200">
                       <p className="font-semibold">🚨 WARNING: Filing False Complaints is a Criminal Offense</p>
                       <ul className="mt-2 space-y-1 text-xs">
                         <li>• <strong>Section 182 IPC:</strong> False information to public servant - Up to 6 months imprisonment</li>
@@ -498,8 +522,8 @@ function Complaint() {
                       </ul>
                     </div>
                     
-                    <div className="bg-yellow-100 p-3 rounded border-l-4 border-yellow-500">
-                      <p className="font-semibold">🔒 SYSTEM ACCOUNTABILITY MEASURES:</p>
+                    <div className="bg-amber-50 p-3 rounded-2xl border border-amber-200">
+                      <p className="font-semibold text-amber-900">🔒 SYSTEM ACCOUNTABILITY MEASURES:</p>
                       <ul className="mt-2 space-y-1 text-xs">
                         <li>• All complaints are logged with your verified identity and IP address</li>
                         <li>• Blockchain evidence ensures tamper-proof audit trail</li>
@@ -1109,28 +1133,6 @@ function Complaint() {
       </div>
     </div>
   );
-
-  // Helper functions
-  useEffect(() => {
-    const fetchBlockchainStats = async () => {
-      if (!token) return;
-      
-      try {
-        const res = await apiFetch('/api/vault/blockchain/stats', {
-          method: 'GET'
-        }, token);
-        
-        const data = await res.json();
-        if (data.success) {
-          setBlockchainStats(data.blockchainStats);
-        }
-      } catch (error) {
-        console.error('Error fetching blockchain stats:', error);
-      }
-    };
-
-    fetchBlockchainStats();
-  }, [token]);
 }
 
 export default Complaint;
